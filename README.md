@@ -1,4 +1,4 @@
-# Ollama-Private-API
+# Ollama-API
  Instructions and and setup for API access to a private language model.
 
 ## Installation
@@ -8,6 +8,7 @@
 
 ## Usage
  - `ollama run llama3` will access a chat interface via command line.
+ - API Documentation: `https://github.com/ollama/ollama/blob/main/docs/api.md`
 
 ## Server Spinup
  - `ollama serve` will start a server instance 
