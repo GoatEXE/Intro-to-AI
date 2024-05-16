@@ -28,10 +28,8 @@ class Extractor():
 
         #Initialization Function
         if self.page_identifier:
-            for n in range(self.page_minimum, self.page_maximum):
+            for n in range(self.page_minimum, self.page_maximum+1):
                 self.unwanted_text.append(f"Page {n}")
-
-            print(self.unwanted_text)
         
 
     def extract_text(self):
@@ -42,7 +40,8 @@ class Extractor():
         Calls self.read_lines to set self.lines to be the filtered .pdf data.
         """
         with open("Logging/Non-Final/base_text.txt", "w", encoding="utf-8") as f:
-            for n in range(self.number_of_pages):
+            #for n in range(self.number_of_pages):
+            for n in range(2):
                 text = self.pdf.pages[n].extract_text().strip("\n")
                 print(text)
                 page = ""
@@ -57,12 +56,13 @@ class Extractor():
 
 
                 if self.delimiter:
-                    split_list = text.split(self.delimiter)
+                    self.separate()
+                    # split_list = text.split(self.delimiter)
                     
-                    for item in split_list:
-                        page += f"{item}"
+                    # for item in split_list:
+                    #     page += f"{item}"
 
-                    text = page.strip()
+                    # text = page.strip()
                         
 
                 f.write(f"{text}\n")
@@ -70,6 +70,22 @@ class Extractor():
         self.read_lines()
 
     
+    def separate(self):
+        self.read_lines()
+        current_object = []
+        all_objects = []
+
+        for line in self.lines:
+            if line.startswith(self.delimiter):
+                all_objects.append(current_object)
+                current_object = []
+                
+            elif line not in current_object:
+                line.append(current_object)
+            
+
+
+
     def read_lines(self):
         """
         Set self.lines to be the filtered data of the self.extract_text method.

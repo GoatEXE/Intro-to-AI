@@ -7,8 +7,9 @@ class AI():
         #TODO: Create a validator function
         self.server_ip = kwargs.get("server_ip", "127.0.0.1:11434")
         self.url = f"http://{self.server_ip}/api/chat"
-        self.data_form_factor = kwargs.get("data_form_factor", "")
-        self.validating_modifier = kwargs.get("validating_modifier", "")
+        self.data_form_factor = kwargs.get("data_form_factor", str())
+        self.data_type = kwargs.get("data_type", str())
+        self.validating_modifier = kwargs.get("validating_modifier", str())
 
 
     def arrange_line(self, line):
@@ -49,7 +50,9 @@ class AI():
         AI is given permission to adjust the content as needed in order to adjust to the form factor.
         """
         background = f"""You are a data validator. Data given to you must match this rule set: {order_of_operations}.
-        Add, remove, or modify text and punctuation as needed. Return only the validated data and say nothing else.
+        Modify text and punctuation as needed. If multiple {self.data_type}s are found, return one on a separate line.
+        Return only the validated {self.data_type} and say nothing else.
+
         {self.validating_modifier}"""
 
         url = f"http://{self.server_ip}/api/chat"
@@ -82,9 +85,8 @@ class AI():
     
 
     def gather_nondata(self, content):
-        background = f"""Identify and extract all strings from the dataset that is not usable data.
-        For example, if the data set are addresses, then return anything that isn't an address.
-        Provide that data on its own lines. Say nothing else other than the provided data."""
+        background = f"""Identify and extract all strings from the dataset that is not a {self.data_type}.
+        Provide that each item on its own line. Say nothing else."""
 
         url = f"http://{self.server_ip}/api/chat"
 

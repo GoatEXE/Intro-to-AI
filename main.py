@@ -13,6 +13,11 @@ unwanted = [
     "Discount Mufflers",
     "Prepared by AI on 05/14/2024", 
     "Customer List",
+    "Confidential",
+    "Addr 1 Addr 2 City, State",
+    "Appointments Listing",
+    "From 3/11/2023 to 3/11/2024",
+    "3/27/24 2:22 PM",
 ]
 
 
@@ -22,13 +27,15 @@ unwanted = [
 
 
 extractor = Extractor(
-    target_document="Source-Documents/alsodiscountmufflers.pdf",
-    unwanted_text=unwanted,
-    delimiter="- ",
+    target_document="Source-Documents/patientlist.pdf",
+    page_identifier=True,
+    page_minimum=2,
+    page_maximum=3,
     )
 
 ai = AI(
     server_ip="192.168.1.90:11434",
+    data_type="Address",
     data_form_factor="[First and Last Name], [Street Address + Suite/Apartment if available], [City State Abbreviation and Zip-Code].",
     validating_modifier="Remove the comma located between the city and state if present."
     )
