@@ -35,6 +35,8 @@ class Extractor():
         with open("Logging/Non-Final/base_text.txt", "w", encoding="utf-8") as f:
             for n in range(self.number_of_pages):
                 text = self.pdf.pages[n].extract_text()
+                page = ""
+
 
                 if self.unwanted_text:
                     for phrase in self.unwanted_text:
@@ -42,7 +44,16 @@ class Extractor():
                             #Remove the instance of an unwanted phrase from the current page
                             first_half, second_half = map(str.strip, text.split(phrase, 1))
                             text = first_half + second_half
-                         
+
+
+                if self.delimiter:
+                    split_list = text.split(self.delimiter)
+                    
+                    for item in split_list:
+                        page += f"{item}"
+
+                    text = page.strip()
+                        
 
                 f.write(text)
 

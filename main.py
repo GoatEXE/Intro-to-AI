@@ -1,9 +1,4 @@
 
-###############
-#Imports
-###############
-
-
 from Classes.PDF_Extractor import Extractor
 from Classes.OllamaAI import AI
 
@@ -27,12 +22,16 @@ unwanted = [
 
 
 extractor = Extractor(
-    target_document="Source-Documents/discountmufflers.pdf",
+    target_document="Source-Documents/DiscountMufflers1.pdf",
     unwanted_text=unwanted,
-    delimiter=None,
+    delimiter=" ",
     )
 
-ai = AI()
+ai = AI(
+    server_ip="192.168.1.90:11434",
+    data_form_factor="[First and Last Name], [Street Address + Suite/Apartment if available], [City State Abbreviation and Zip-Code].",
+    validating_modifier="Remove the comma located between the city and state if present."
+    )
 
 
 #############
@@ -42,6 +41,6 @@ ai = AI()
 
 extractor.extract_text()
 
-for line in extractor.lines:
-    ai.arrange_line(line)
-    break
+# for line in extractor.lines:
+#     ai.arrange_line(line)
+    
