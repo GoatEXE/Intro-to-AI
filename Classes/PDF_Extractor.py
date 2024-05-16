@@ -14,14 +14,24 @@ class Extractor():
 
         #Arguments
         self.target_document = target_document
-        self.delimiter = kwargs.get("delimiter", None)
-        self.unwanted_text = kwargs.get("unwanted_text", None)
+        self.delimiter = kwargs.get("delimiter", str())
+        self.unwanted_text = kwargs.get("unwanted_text", list())
+        self.page_identifier = kwargs.get("page_identifier", False)
+        self.page_minimum = kwargs.get("page_minimum", int())
+        self.page_maximum = kwargs.get("page_maximum", int())
 
         #Initialization References
         self.file_name = os.path.splitext(os.path.basename(target_document))[0]
         self.pdf = PdfReader(self.target_document)
         self.number_of_pages = len(self.pdf.pages)
         self.lines = None
+
+        #Initialization Function
+        if self.page_identifier:
+            for n in range(self.page_minimum, self.page_maximum):
+                self.unwanted_text.append(f"Page {n}")
+
+            print(self.unwanted_text)
         
 
     def extract_text(self):
@@ -31,16 +41,16 @@ class Extractor():
         Creates a text file in the Logging/Non-Final directory of the total extracted text.
         Calls self.read_lines to set self.lines to be the filtered .pdf data.
         """
-        #TODO: Test with multipage document
         with open("Logging/Non-Final/base_text.txt", "w", encoding="utf-8") as f:
             for n in range(self.number_of_pages):
-                text = self.pdf.pages[n].extract_text()
+                text = self.pdf.pages[n].extract_text().strip("\n")
+                print(text)
                 page = ""
 
 
                 if self.unwanted_text:
                     for phrase in self.unwanted_text:
-                        if phrase in text:
+                        while phrase in text:
                             #Remove the instance of an unwanted phrase from the current page
                             first_half, second_half = map(str.strip, text.split(phrase, 1))
                             text = first_half + second_half
@@ -55,7 +65,7 @@ class Extractor():
                     text = page.strip()
                         
 
-                f.write(text)
+                f.write(f"{text}\n")
 
         self.read_lines()
 

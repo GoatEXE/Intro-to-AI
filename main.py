@@ -22,9 +22,9 @@ unwanted = [
 
 
 extractor = Extractor(
-    target_document="Source-Documents/DiscountMufflers1.pdf",
+    target_document="Source-Documents/alsodiscountmufflers.pdf",
     unwanted_text=unwanted,
-    delimiter=" ",
+    delimiter="- ",
     )
 
 ai = AI(
@@ -40,6 +40,8 @@ ai = AI(
 
 
 extractor.extract_text()
+
+#ai.gather_nondata("".join(extractor.lines))
 
 # for line in extractor.lines:
 #     ai.arrange_line(line)
