@@ -13,15 +13,13 @@ class AI():
 
 
     def arrange_line(self, line):
-        
-
-        background = f"""You are a data organizer with a specific task. 
-        Your role is to rearrange provided pieces of information into a single line format, following a precise order and punctuation rules. 
-        Organize the data in this sequence: {self.data_form_factor}. Use commas only to separate the elements where indicated. 
-        Return only the organized data in one line."""
+        background = f"""
+        Organize data into a single line format following this sequence: {self.data_form_factor}.
+        Use commas to separate the elements where shown in the sequence.
+        Return only the organized data and say nothing else."""
 
         data = {
-            "model": "llama3",
+            "model": "phi3",
             "messages": [
                 {"role": "assistant",
                 "content": background + self.data_form_factor
@@ -45,21 +43,18 @@ class AI():
     
     
     def validate(self, order_of_operations, content):
+        background = f"""You are responsible for conforming data to a sequence.
+        Validate that the given data is in this sequence: {order_of_operations}.
+        Modify text or punctuation as necessary.
+        Return the result and say nothing else.
+        {self.validating_modifier}
         """
-        Given a form factor that data is to adhere do, AI validates that the given data matches the form factor.
-        AI is given permission to adjust the content as needed in order to adjust to the form factor.
-        """
-        background = f"""You are a data validator. Data given to you must match this rule set: {order_of_operations}.
-        Modify text and punctuation as needed. If multiple {self.data_type}s are found, return one on a separate line.
-        Return only the validated {self.data_type} and say nothing else.
-
-        {self.validating_modifier}"""
 
         url = f"http://{self.server_ip}/api/chat"
 
 
         data = {
-            "model": "llama3",
+            "model": "phi3",
             "messages": [
                 {"role": "assistant",
                 "content": background
@@ -79,8 +74,8 @@ class AI():
         response = requests.post(url, data=json_data).json()
 
         message = response["message"]["content"]
+        
         print(message)
-
         return message
     
 
@@ -92,7 +87,7 @@ class AI():
 
 
         data = {
-            "model": "llama3",
+            "model": "phi3",
             "messages": [
                 {"role": "assistant",
                 "content": background
