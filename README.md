@@ -1,25 +1,22 @@
-# Ollama-API
- Instructions and and setup for API access to a private language model. The usage of Ollama within an organization is useful in the case of dealing with customer or sensative data. Since Ollama does not communicate outside the local network, there is no risk of compromising data due to cloud language model learning.
+# Intro to AI
 
-## Installation/First Time Setup
- - Install Ollama Windows preview from https://ollama.com/
- - From command line local host: `ollama pull llama3`
- - Other commands, LLMs, and references found here https://github.com/ollama/ollama
 
-## Usage
- - `ollama run llama3` will access a chat interface via command line.
- - API Documentation: https://github.com/ollama/ollama/blob/main/docs/api.md
+### Table of Contents
+- [Intro](#intro)
+- [Overview](#overview)
+- [Structure](#structure)
 
-## Server Spinup
- - `ollama serve` will start a server instance 
- - You must first create a SYSTEM environment variable titled "OLLAMA_HOST" with a value of the IP address of the server device.
-   - https://github.com/ollama/ollama/blob/main/docs/faq.md#how-can-i-expose-ollama-on-my-network
- - A potential error `localhost:11434: bind: adddress already in use` can populate if there's more than one Ollama service running in the background:
-   - Close Ollama application is task tray or:
-   - Launch command prompt as admin
-   - `netstat -aon | findstr :11434`
-   - `taskkill /F /PID <PID>`
 
-## Classes
- - `OllamaAI.py` is responsible for interacting with the serving Ollama API. Example calls can be found in the `/AI-Examples` directory.
- - `PDF_Extractor.py` is a non-OCR PDF text extractor. Using several keyword arguements, you can set a delimiter, or even words or phrases you want filtered out. 
+##  Intro
+Hello friend! My name is Dustin and I'm an IT healthcare professional. I've been in the world of professional tech for 7+ years now. A lot of what I do on the daily is greatly empowered by leveraging the use of technology and AI. When I write here, I'm coming from experience and passion, both of which I would love to share and spread as much as possible. More to come!
+
+
+## Overview
+This is a collection of my understanding on what AI is and how you could practically use it in your every day life. It occurs to me that normal people (non-nerds :D) could get lost in the sea of overcomplication that is the internet. I'll do my best to break down the thought process as well as I can. The neat part here is that I'm using AI to cover the key points of interest on the topic of AI. 
+
+
+## Structure
+Similar to crawl/walk/run, I'm organizing this topic into three categories: beginner, intermediate, and advanced. Within each folder, you'll find topics that match each difficulty. You can expect examples of generative AI(text, images, audio), natural language processing, and even fine-tuning your own AI(work in progress).
+
+Each section will have a readme (what you're reading now) and any associated examples will also be contained within the active difficulty. I intend accessibility and clarity to be key assets overall.   
+
