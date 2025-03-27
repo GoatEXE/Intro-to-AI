@@ -16,7 +16,7 @@ This is a collection of my understanding on what AI is and how you could practic
 
 
 ## Structure
-Similar to crawl/walk/run, I'm organizing this topic into three categories: beginner, intermediate, and advanced. Within each folder, you'll find topics that match each difficulty. You can expect examples of generative AI(text, images, audio), natural language processing, and even fine-tuning your own AI(work in progress).
+Similar to crawl/walk/run, I'm organizing this topic into three categories: [beginner](https://github.com/GoatEXE/Intro-to-AI/tree/main/1-Beginner), [intermediate](https://github.com/GoatEXE/Intro-to-AI/tree/main/2-Intermediate), and [advanced](https://github.com/GoatEXE/Intro-to-AI/tree/main/3-Advanced). Within each folder, you'll find topics that match each difficulty. You can expect examples of generative AI(text, images, audio), natural language processing, and even fine-tuning your own AI(work in progress).
 
 Each section will have a readme (what you're reading now) and any associated examples will also be contained within the active difficulty. I intend accessibility and clarity to be key assets overall.   
 
